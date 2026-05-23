@@ -20,6 +20,9 @@ function TaskCard(props){
         <button onClick={props.deleteTask}>
           Delete
         </button>
+        <button onClick={props.toggleComplete}>
+          Complete
+        </button>
       </div>
   );
 }

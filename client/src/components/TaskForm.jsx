@@ -22,6 +22,19 @@ function TaskForm() {
 
   setTasks(updatedTasks);
   }
+  function handleToggleComplete(indexToToggle) {
+    const updatedTasks = tasks.map((item ,index) => {
+      if (index === indexToToggle) {
+        return {
+          ...item,
+          completed: !item.completed,
+        };
+      }
+      return item;
+    });
+
+    setTasks(updatedTasks);
+  }
 
   return (
     <div>
@@ -42,6 +55,7 @@ function TaskForm() {
         taskName={item.text}
         completed={item.completed}
         deleteTask={() => handleDeleteTask(index)}
+        toggleComplete={() => handleToggleComplete(index)}
         />
       ))}
     </div>
