@@ -6,7 +6,13 @@ function TaskForm() {
   const [tasks, setTasks] = useState([]);
 
   function handleAddTask() {
-    setTasks([...tasks, task]);
+    setTasks([
+  ...tasks,
+  {
+    text: task,
+    completed: false,
+  },
+  ]);
     setTask("");
   }
   function handleDeleteTask(indexToDelete) {
@@ -33,7 +39,8 @@ function TaskForm() {
       {tasks.map((item ,index) => (
         <TaskCard
         key={index}
-        taskName={item}
+        taskName={item.text}
+        completed={item.completed}
         deleteTask={() => handleDeleteTask(index)}
         />
       ))}

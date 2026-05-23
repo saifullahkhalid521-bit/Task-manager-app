@@ -8,7 +8,15 @@ function TaskCard(props){
         borderRadius:"10px",
       }}
       >
-        <p>{props.taskName}</p>
+      <p
+        style={{
+          textDecoration: props.completed
+            ? "line-through"
+            : "none",
+        }}
+        >
+        {props.taskName}
+      </p>
         <button onClick={props.deleteTask}>
           Delete
         </button>
