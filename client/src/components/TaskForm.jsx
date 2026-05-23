@@ -9,6 +9,13 @@ function TaskForm() {
     setTasks([...tasks, task]);
     setTask("");
   }
+  function handleDeleteTask(indexToDelete) {
+  const updatedTasks = tasks.filter(
+    (_, index) => index !== indexToDelete
+  );
+
+  setTasks(updatedTasks);
+  }
 
   return (
     <div>
@@ -23,8 +30,12 @@ function TaskForm() {
         Add Task
       </button>
 
-      {tasks.map((item , index) => (
-        <TaskCard key={index} taskName={item} />
+      {tasks.map((item ,index) => (
+        <TaskCard
+        key={index}
+        taskName={item}
+        deleteTask={() => handleDeleteTask(index)}
+        />
       ))}
     </div>
   );
