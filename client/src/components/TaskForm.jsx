@@ -19,6 +19,9 @@ function TaskForm() {
 }, [tasks]);
 
   function handleAddTask() {
+    if (task.trim() === "") {
+     return;
+  }
     setTasks([
   ...tasks,
   {
