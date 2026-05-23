@@ -1,9 +1,22 @@
 import TaskCard from "./TaskCard";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 function TaskForm() {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+  const savedTasks = localStorage.getItem("tasks");
+
+  return savedTasks
+    ? JSON.parse(savedTasks)
+    : [];
+  });
+
+  useEffect(() => {
+  localStorage.setItem(
+    "tasks",
+    JSON.stringify(tasks)
+  );
+}, [tasks]);
 
   function handleAddTask() {
     setTasks([
