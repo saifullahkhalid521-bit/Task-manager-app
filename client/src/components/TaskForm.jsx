@@ -1,3 +1,4 @@
+import TaskCard from "./TaskCard";
 import { useState } from "react";
 
 function TaskForm() {
@@ -22,8 +23,8 @@ function TaskForm() {
         Add Task
       </button>
 
-      {tasks.map((item, index) => (
-        <p key={index}>{item}</p>
+      {tasks.map((item , index) => (
+        <TaskCard key={index} taskName={item} />
       ))}
     </div>
   );
