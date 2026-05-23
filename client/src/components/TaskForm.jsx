@@ -11,6 +11,13 @@ function TaskForm() {
     : [];
   });
 
+    const completedTasks = tasks.filter(
+  (item) => item.completed
+  ).length;
+ 
+  const pendingTasks =
+  tasks.length - completedTasks;
+  
   useEffect(() => {
   localStorage.setItem(
     "tasks",
@@ -54,6 +61,11 @@ function TaskForm() {
 
   return (
     <div>
+    <h3>Total Tasks: {tasks.length}</h3>
+
+    <h3>Completed Tasks: {completedTasks}</h3>
+
+    <h3>Pending Tasks: {pendingTasks}</h3>
       <input
         type="text"
         placeholder="Enter task"
