@@ -11,6 +11,8 @@ function TaskForm() {
     : [];
   });
 
+  const [filter, setFilter] = useState("all");
+  
     const completedTasks = tasks.filter(
   (item) => item.completed
   ).length;
@@ -59,6 +61,21 @@ function TaskForm() {
     setTasks(updatedTasks);
   }
 
+  const filteredTasks = tasks.filter((item) => {
+
+    if (filter === "completed") {
+      return item.completed;
+    }
+
+    if (filter === "pending") {
+      return !item.completed;
+    }
+
+    return true;
+  });
+
+
+
   return (
     <div>
     <h3>Total Tasks: {tasks.length}</h3>
@@ -66,6 +83,18 @@ function TaskForm() {
     <h3>Completed Tasks: {completedTasks}</h3>
 
     <h3>Pending Tasks: {pendingTasks}</h3>
+
+    <button onClick={() => setFilter("all")}>
+      All
+    </button>
+
+    <button onClick={()=> setFilter("completed")}>
+      Completed
+    </button>
+
+    <button onClick={()=> setFilter("pending")}>
+      Pending
+    </button>
       <input
         type="text"
         placeholder="Enter task"
@@ -82,7 +111,7 @@ function TaskForm() {
         Add Task
       </button>
 
-      {tasks.map((item ,index) => (
+      {filteredTasks.map((item ,index) => (
         <TaskCard
         key={index}
         taskName={item.text}
