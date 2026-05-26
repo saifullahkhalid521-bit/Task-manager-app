@@ -71,6 +71,11 @@ function TaskForm() {
         placeholder="Enter task"
         value={task}
         onChange={(e) => setTask(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleAddTask();
+          }
+        }}
       />
 
       <button onClick={handleAddTask}>
