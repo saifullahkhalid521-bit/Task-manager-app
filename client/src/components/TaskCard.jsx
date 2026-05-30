@@ -5,9 +5,9 @@ function TaskCard(props){
   return(
     <div 
       style={{
-        border:"1px solid gray",
-        padding:"10px",
-        margin:"10px",
+        border:"1px solid #ccc",
+        padding:"15px",
+        margin:"15px 0",
         borderRadius:"10px",
       }}
       >
@@ -23,6 +23,8 @@ function TaskCard(props){
   ) : (
     <p
       style={{
+        fontSize: "22px",
+        marginBottom: "15px",
         textDecoration: props.completed
           ? "line-through"
           : "none",
@@ -32,23 +34,40 @@ function TaskCard(props){
           </p>
         )
       }
-        <button onClick={props.deleteTask}>
+      <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "10px",
+        marginTop: "10px",
+        flexWrap: "wrap",
+      }}
+    >
+       <button onClick={props.deleteTask}>
           Delete
         </button>
         <button onClick={props.toggleComplete}>
           Complete
         </button>
-        <button onClick={()=> setIsEditing(true)}>
+        {!isEditing && (
+        <button onClick={() => setIsEditing(true)}>
           Edit
         </button>
-        <button 
-        onClick={() =>{
-          props.editTask(editedText);
-          setIsEditing(false);
-        }}>
+        )}
+
+      {isEditing && (
+        <button
+          onClick={() => {
+            props.editTask(editedText);
+            setIsEditing(false);
+          }}
+        >
           Save
         </button>
+      )}
       </div>
+    </div>
+       
   );
 }
 
