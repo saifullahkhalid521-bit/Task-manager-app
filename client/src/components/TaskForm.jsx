@@ -12,6 +12,7 @@ function TaskForm() {
   });
 
   const [filter, setFilter] = useState("all");
+  const [searchTerm , setSearchTerm] = useState("");
   
     const completedTasks = tasks.filter(
   (item) => item.completed
@@ -79,19 +80,31 @@ function TaskForm() {
   setTasks(updatedTasks);
 }
 
-  const filteredTasks = tasks.filter((item) => {
+const filteredTasks = tasks.filter((item) => {
 
-    if (filter === "completed") {
-      return item.completed;
-    }
+  const matchesSearch =
+    item.text
+      .toLowerCase()
+      .includes(
+        searchTerm.toLowerCase()
+      );
 
-    if (filter === "pending") {
-      return !item.completed;
-    }
+  if (filter === "completed") {
+    return (
+      item.completed &&
+      matchesSearch
+    );
+  }
 
-    return true;
+  if (filter === "pending") {
+    return (
+      !item.completed &&
+      matchesSearch
+    );
+  }
+
+  return matchesSearch;
   });
-
 
 
   return (
@@ -113,6 +126,14 @@ function TaskForm() {
     <button onClick={()=> setFilter("pending")}>
       Pending
     </button>
+
+    <input
+      type="text"
+      placeholder="Search tasks..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
       <input
         type="text"
         placeholder="Enter task"
