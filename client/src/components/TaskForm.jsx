@@ -60,6 +60,24 @@ function TaskForm() {
 
     setTasks(updatedTasks);
   }
+  function handleEditTask(indexToEdit, newText) {
+
+  const updatedTasks = tasks.map(
+    (item, index) => {
+
+      if (index === indexToEdit) {
+        return {
+          ...item,
+          text: newText,
+        };
+      }
+
+      return item;
+    }
+  );
+
+  setTasks(updatedTasks);
+}
 
   const filteredTasks = tasks.filter((item) => {
 
@@ -118,6 +136,9 @@ function TaskForm() {
         completed={item.completed}
         deleteTask={() => handleDeleteTask(index)}
         toggleComplete={() => handleToggleComplete(index)}
+        editTask={(newText) =>
+        handleEditTask(index, newText)
+  }
         />
       ))}
     </div>

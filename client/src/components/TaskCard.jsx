@@ -1,4 +1,7 @@
+import { useState } from "react";
 function TaskCard(props){
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(props.taskName);
   return(
     <div 
       style={{
@@ -8,20 +11,42 @@ function TaskCard(props){
         borderRadius:"10px",
       }}
       >
-      <p
-        style={{
-          textDecoration: props.completed
-            ? "line-through"
-            : "none",
-        }}
-        >
-        {props.taskName}
-      </p>
+      {
+  isEditing ? (
+    <input
+      type="text"
+      value={editedText}
+      onChange={(e) =>
+        setEditedText(e.target.value)
+      }
+    />
+  ) : (
+    <p
+      style={{
+        textDecoration: props.completed
+          ? "line-through"
+          : "none",
+      }}
+          >
+            {props.taskName}
+          </p>
+        )
+      }
         <button onClick={props.deleteTask}>
           Delete
         </button>
         <button onClick={props.toggleComplete}>
           Complete
+        </button>
+        <button onClick={()=> setIsEditing(true)}>
+          Edit
+        </button>
+        <button 
+        onClick={() =>{
+          props.editTask(editedText);
+          setIsEditing(false);
+        }}>
+          Save
         </button>
       </div>
   );
