@@ -78,7 +78,16 @@ function TaskForm() {
   );
 
   setTasks(updatedTasks);
-}
+  }
+  function handleClearCompleted(){
+
+    const updatedTasks = tasks.filter(
+      (item) => !item.completed
+    );
+
+    setTasks(updatedTasks);
+
+  }
 
 const filteredTasks = tasks.filter((item) => {
 
@@ -125,6 +134,9 @@ const filteredTasks = tasks.filter((item) => {
 
     <button onClick={()=> setFilter("pending")}>
       Pending
+    </button>
+    <button onClick={handleClearCompleted}>
+      Clear Completed
     </button>
 
     <input
